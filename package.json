@@ -1,0 +1,20 @@
+{
+  "name": "vaicaralho",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pm2": "^4.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "start": "nodemon",
+    "production":"pm2 start index.js --name init-express"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
