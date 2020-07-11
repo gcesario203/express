@@ -5,6 +5,8 @@ const bodyParser = require('body-parser')
 
 const teste = require('./testeDosCria')
 const userApi = require('./api/user')
+require('./api/produto')(app)
+
 
 app.use(bodyParser.text())
 app.use(bodyParser.json())
