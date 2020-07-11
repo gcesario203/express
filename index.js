@@ -2,7 +2,13 @@ const express = require('express')
 const app =express()
 const port = 3000
 const teste = require('./testeDosCria')
+const bodyParser = require('body-parser')
 
+app.use(bodyParser.text())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+    extended:true
+}))
 
 app.use(teste())
 
@@ -15,15 +21,19 @@ app.get('/clientes/:id',(req,res,next)=>{
 })
 
 app.post('/body',(req,res)=>{
-    let corpo = ''
-    req.on('data',function(parte){
-        corpo+=parte
-    })
+    // let corpo = ''
+    // req.on('data',function(parte){
+    //     corpo+=parte
+    // })
 
-    req.on('end',function(){
-        console.log(corpo)
-        res.json(JSON.parse(corpo))
-    })
+    // req.on('end',function(){
+    //     console.log(corpo)
+    //     res.json(JSON.parse(corpo))
+    // })
+    console.log(req.body.nome)
+    console.log(req.body.adjetivo)
+    console.log(JSON.stringify(req.body))
+    res.send(req.body)
 })
 
 app.use('/teste',(req,res,next)=>{
