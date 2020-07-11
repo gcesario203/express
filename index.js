@@ -1,8 +1,10 @@
 const express = require('express')
 const app =express()
 const port = 3000
-const teste = require('./testeDosCria')
 const bodyParser = require('body-parser')
+
+const teste = require('./testeDosCria')
+const userApi = require('./api/user')
 
 app.use(bodyParser.text())
 app.use(bodyParser.json())
@@ -11,6 +13,10 @@ app.use(bodyParser.urlencoded({
 }))
 
 app.use(teste())
+
+app.post('/user',userApi.save())
+
+app.get('/user/:id',userApi.read())
 
 app.get('/clientes/relatorio',(req,res)=>{
     res.send('Cliente relatorio: completo '+req.query.completo+' ano: '+req.query.ano)
