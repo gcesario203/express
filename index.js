@@ -1,10 +1,29 @@
 const express = require('express')
 const app =express()
 const port = 3000
+const teste = require('./testeDosCria')
 
-app.use((req,res,next)=>{
-    console.log('Em qualquer rota eu estarei la, independente da requisição')
-    next()
+
+app.use(teste())
+
+app.get('/clientes/relatorio',(req,res)=>{
+    res.send('Cliente relatorio: completo '+req.query.completo+' ano: '+req.query.ano)
+})
+
+app.get('/clientes/:id',(req,res,next)=>{
+    res.send(`Cliente ${req.params.id} selecionado`)
+})
+
+app.post('/body',(req,res)=>{
+    let corpo = ''
+    req.on('data',function(parte){
+        corpo+=parte
+    })
+
+    req.on('end',function(){
+        console.log(corpo)
+        res.json(JSON.parse(corpo))
+    })
 })
 
 app.use('/teste',(req,res,next)=>{
